@@ -1,0 +1,27 @@
+clear variables;
+close all;
+
+h = 0.01;
+t = 0:h:2;
+y0 = 1;
+y10 = 0;
+y20 = 1;
+
+
+f = @(t, y, z, w) z;
+g = @(t, y, z, w) w;
+j = @(t, y, z, w) t*exp(-t.^(2)) - 1/y ;
+
+y = zeros(1, length(t));
+y(1) = y0;
+z = zeros(1, length(t));
+z(1) = y0;
+w = zeros(1, length(t));
+w(1) = y20;
+for k=1:length(t)-1
+    y(k+1) = y(k) + h*f(t(k+1), y(k+1), z(k+1), w(k+1))
+    y(k+1) = y(k) + h*f(t(k+1), y(k+1), z(k+1), w(k+1))
+    y(k+1) = y(k) + h*f(t(k+1), y(k+1), z(k+1), w(k+1));
+    
+end 
+
